@@ -1,13 +1,7 @@
 import pygame 
 from constants import *
+from player import Player
 
-SCREEN_WIDTH = 1280
-SCREEN_HEIGHT = 720
-
-ASTEROID_MIN_RADIUS = 20
-ASTEROID_KINDS = 3
-ASTEROID_SPAWN_RATE = 0.8  # seconds
-ASTEROID_MAX_RADIUS = ASTEROID_MIN_RADIUS * ASTEROID_KINDS
 
 def main():
     print ("Starting Asteroids!")
@@ -15,7 +9,7 @@ def main():
     print (f"Screen height: {SCREEN_HEIGHT}")
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-
+    player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
     
     clock = pygame.time.Clock()
     dt = 0 
@@ -26,12 +20,11 @@ def main():
                 pygame.quit() 
                 return 
 
- 
-            screen.fill((0,0,0))
-            pygame.display.flip()
-           
-            dt = clock.tick(60) / 1000
-            print(dt)
-                                                     
+        player.update(dt)
+        screen.fill((0,0,0))
+        player.draw(screen)
+        pygame.display.flip()
+        dt = clock.tick(60) / 1000
+
 if __name__ == "__main__":
     main()

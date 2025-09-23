@@ -1,4 +1,5 @@
-import pygame 
+import pygame
+import sys 
 from constants import *
 from player import Player
 from asteroid import Asteroid
@@ -30,6 +31,7 @@ def main():
     Player.containers = (updatable, drawable)
 
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+    
 
     dt = 0
 
@@ -42,6 +44,11 @@ def main():
         
 
         updatable.update(dt)
+        for asteroid in asteroids:
+            if asteroid.collision(player):
+                print("Game over!")
+                sys.exit()
+
         screen.fill((0,0,0))
         for x in drawable:
             x.draw(screen)

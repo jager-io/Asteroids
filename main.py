@@ -28,13 +28,11 @@ def main():
     AsteroidField.containers = updatable
     asteroid_field = AsteroidField()
 
-    Player.containers = (updatable, drawable)
-
-    player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
-    
     shots = pygame.sprite.Group()
+    Shot.containers = (shots, updatable, drawable)
 
-    Shot.containers = (shots, updatable, drawable)    
+    Player.containers = (updatable, drawable)
+    player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, shots)
 
     dt = 0
 
